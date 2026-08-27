@@ -2,7 +2,7 @@
 -- Hospital Readmission Analysis — Diabetes 130-US Hospitals
 -- Checkpoint 1, Task 1.4: SQL Query Report
 --
--- Run 01_create_database.sql first (creates and populates
+-- Run schema.sql then load_data.sql first (creates and populates
 -- hospital_readmission.patients / encounters / lookup tables).
 -- Each query below is grouped to match the template's four
 -- required categories. Paste each query's SQL + result screenshot
@@ -33,12 +33,12 @@ LIMIT 20;
 
 -- Query 1.2 — Senior patients (60+) with a history of frequent prior inpatient stays.
 SELECT
-    encounter_id,
-    patient_nbr,
-    age,
-    number_inpatient,
-    discharge_disposition_id,
-    readmitted
+    e.encounter_id,
+    e.patient_nbr,
+    p.age,
+    e.number_inpatient,
+    e.discharge_disposition_id,
+    e.readmitted
 FROM encounters e
 JOIN patients p ON p.patient_nbr = e.patient_nbr
 WHERE p.age IN ('[60-70)', '[70-80)', '[80-90)', '[90-100)')
